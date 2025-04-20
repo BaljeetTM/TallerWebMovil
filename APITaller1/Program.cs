@@ -25,6 +25,7 @@ try
     });
 
     var app = builder.Build();
+    DbInitializer.InitDb(app);
     app.MapControllers();
     app.Run();
 }
