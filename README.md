@@ -30,6 +30,7 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
 2. **Navega al directorio del proyecto**:  
    ```bash
    cd TallerWebMovil
+   cd .\APITaller1\
    
 3. **Restaura las dependencias del proyecto**:  
    ```bash
