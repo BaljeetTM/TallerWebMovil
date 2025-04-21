@@ -9,6 +9,7 @@ namespace APITaller1.src.Models
     {
         public int Id { get; set; }
         public int RoleId { get; set; }
+        public Role? Role { get; set; }
         public required string FullName { get; set; }
         public required string lastName { get; set; }
         public required string email { get; set; }
