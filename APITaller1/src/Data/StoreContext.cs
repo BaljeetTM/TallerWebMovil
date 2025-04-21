@@ -14,6 +14,7 @@ namespace APITaller1.src.Data
         public required DbSet<Product> Products { get; set; }
         public required DbSet<User> Clients { get; set; }
         public required DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public required DbSet<Address> Addresses { get; set; }
 
     }
 
