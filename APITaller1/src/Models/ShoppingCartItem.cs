@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace APITaller1.src.Models
 {
-    public class CartItem
+    public class ShoppingCartItem
     {
         public int Id { get; set; }
 
