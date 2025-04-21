@@ -17,9 +17,9 @@ namespace APITaller1.src.Models
         public required string phoneNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime RegistrationDate { get; set; } = DateTime.Now;
-        // public List<Address>? Addresses { get; set; }
+        public List<Address>? Addresses { get; set; }
         public ShoppingCart? Cart { get; set; }
-        // public List<Order>? Orders { get; set; }
+        public List<Order>? Orders { get; set; }
         public required string PasswordHash { get; set; }
         public string[]? Urls { get; set; }
     }
