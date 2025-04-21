@@ -23,6 +23,6 @@ namespace APITaller1.src.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }
 
-        //public List<ProductImage>? Images { get; set; }
+        public List<ProductImage>? Images { get; set; }
     }
 }
