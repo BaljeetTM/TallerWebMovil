@@ -6,37 +6,46 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace APITaller1.src.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddNewColumns : Migration
+    public partial class NombreDeTuMigracion : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<DateTime>(
-                name: "CreatedAt",
-                table: "Products",
-                type: "TEXT",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Category = table.Column<string>(type: "TEXT", nullable: false),
+                    Urls = table.Column<string>(type: "TEXT", nullable: true),
+                    Stock = table.Column<int>(type: "INTEGER", nullable: false),
+                    Brand = table.Column<string>(type: "TEXT", nullable: false),
+                    State = table.Column<string>(type: "TEXT", nullable: false),
+                    Visible = table.Column<bool>(type: "INTEGER", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                });
 
-            migrationBuilder.AddColumn<string>(
-                name: "State",
-                table: "Products",
-                type: "TEXT",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<DateTime>(
-                name: "UpdatedAt",
-                table: "Products",
-                type: "TEXT",
-                nullable: true);
-
-            migrationBuilder.AddColumn<bool>(
-                name: "Visible",
-                table: "Products",
-                type: "INTEGER",
-                nullable: false,
-                defaultValue: false);
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "ProductImages",
@@ -59,41 +68,27 @@ namespace APITaller1.src.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Clients",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RoleId = table.Column<int>(type: "INTEGER", nullable: false),
                     FullName = table.Column<string>(type: "TEXT", nullable: false),
-                    lastName = table.Column<string>(type: "TEXT", nullable: false),
-                    email = table.Column<string>(type: "TEXT", nullable: false),
-                    password = table.Column<string>(type: "TEXT", nullable: false),
-                    address = table.Column<string>(type: "TEXT", nullable: false),
-                    phoneNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Address = table.Column<string>(type: "TEXT", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
                     RegistrationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     PasswordHash = table.Column<string>(type: "TEXT", nullable: false),
-                    Urls = table.Column<string>(type: "TEXT", nullable: true)
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Clients_Roles_RoleId",
+                        name: "FK_User_Roles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "Roles",
                         principalColumn: "Id",
@@ -118,9 +113,9 @@ namespace APITaller1.src.Data.Migrations
                 {
                     table.PrimaryKey("PK_Addresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Addresses_Clients_UserId",
+                        name: "FK_Addresses_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Clients",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -139,9 +134,9 @@ namespace APITaller1.src.Data.Migrations
                 {
                     table.PrimaryKey("PK_DeactivationReasons", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DeactivationReasons_Clients_UserId",
+                        name: "FK_DeactivationReasons_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Clients",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -158,9 +153,9 @@ namespace APITaller1.src.Data.Migrations
                 {
                     table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ShoppingCarts_Clients_UserId",
+                        name: "FK_ShoppingCarts_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Clients",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -186,9 +181,9 @@ namespace APITaller1.src.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Clients_UserId",
+                        name: "FK_Orders_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Clients",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -254,11 +249,6 @@ namespace APITaller1.src.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clients_RoleId",
-                table: "Clients",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DeactivationReasons_UserId",
                 table: "DeactivationReasons",
                 column: "UserId");
@@ -303,6 +293,11 @@ namespace APITaller1.src.Data.Migrations
                 table: "ShoppingCarts",
                 column: "UserId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_RoleId",
+                table: "User",
+                column: "RoleId");
         }
 
         /// <inheritdoc />
@@ -324,32 +319,19 @@ namespace APITaller1.src.Data.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
                 name: "ShoppingCarts");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Roles");
-
-            migrationBuilder.DropColumn(
-                name: "CreatedAt",
-                table: "Products");
-
-            migrationBuilder.DropColumn(
-                name: "State",
-                table: "Products");
-
-            migrationBuilder.DropColumn(
-                name: "UpdatedAt",
-                table: "Products");
-
-            migrationBuilder.DropColumn(
-                name: "Visible",
-                table: "Products");
         }
     }
 }

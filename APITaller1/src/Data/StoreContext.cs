@@ -11,6 +11,7 @@ namespace APITaller1.src.Data
 {
     public class StoreContext(DbContextOptions options) : DbContext(options)
     {
+        public required DbSet<User> Users { get; set; }
         public required DbSet<Product> Products { get; set; }
         public required DbSet<User> Clients { get; set; }
         public required DbSet<ShoppingCart> ShoppingCarts { get; set; }
