@@ -33,4 +33,48 @@ public class UsersController : ControllerBase
 
         return Ok(userDtos);
     }
+
+    [HttpGet("{id}")] // api/users/1
+    public async Task<ActionResult<UserDto>> GetUser(int id)
+    {
+        var user = await _context.Users
+            .Include(u => u.Role) // Muy importante para que se cargue Role
+            .FirstOrDefaultAsync(u => u.Id == id);
+
+        if (user == null) return NotFound();
+
+        var userDto = _mapper.Map<UserDto>(user);
+        return Ok(userDto);
+    }
+
+    [HttpPut("{id}")] // api/users/1
+    public async Task<ActionResult> UpdateUser(int id, UpdateUserDto dto)
+    {
+        var user = await _context.Users
+            .Include(u => u.Role) // Muy importante para que se cargue Role
+            .FirstOrDefaultAsync(u => u.Id == id);
+
+        if (user == null) return NotFound();
+
+        _mapper.Map(dto, user); // Mapeo de UpdateUserDto a User
+
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")] // api/users/1
+    public async Task<ActionResult> DeleteUser(int id)
+    {
+        var user = await _context.Users
+            .Include(u => u.Role) // Muy importante para que se cargue Role
+            .FirstOrDefaultAsync(u => u.Id == id);
+
+        if (user == null) return NotFound();
+
+        _context.Users.Remove(user);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 }
