@@ -1,8 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
 using APITaller1.src.Dtos.Product;
-using APITaller1.src.Models;
 using APITaller1.src.Interfaces;
+using APITaller1.src.Models;
+
+using AutoMapper;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace APITaller1.src.Controllers
 {

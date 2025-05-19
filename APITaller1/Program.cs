@@ -1,8 +1,10 @@
 using APITaller1.src.Data;
-using APITaller1.src.Services;
-using APITaller1.src.Repositories;
 using APITaller1.src.Interfaces;
+using APITaller1.src.Repositories;
+using APITaller1.src.Services;
+
 using Microsoft.EntityFrameworkCore;
+
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
