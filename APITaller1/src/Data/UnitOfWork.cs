@@ -12,9 +12,13 @@ namespace APITaller1.src.Data
         {
             _context = context;
             Products = new ProductRepository(_context);
+            Users = new UserRepository(_context);
+
         }
 
         public IProductRepository Products { get; }
+        public IUserRepository Users { get; }
+
 
         public async Task<int> CompleteAsync()
         {

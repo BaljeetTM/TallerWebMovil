@@ -26,6 +26,7 @@ try
     builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
 
     builder.Services.AddScoped<IProductRepository, ProductRepository>();
+    builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
     builder.Host.UseSerilog((context, services, configuration) =>

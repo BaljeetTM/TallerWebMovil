@@ -1,79 +1,62 @@
-using APITaller1.src.Data;
+using APITaller1.src.Interfaces;
 using APITaller1.src.Dtos;
 using APITaller1.src.Dtos.User;
 using APITaller1.src.Models;
-
 using AutoMapper;
-
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
 
 [ApiController]
 [Route("api/[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly StoreContext _context;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public UsersController(StoreContext context, IMapper mapper)
+    public UsersController(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
     {
-        var users = await _context.Users
-            .Include(u => u.Role) // Muy importante para que se cargue Role
-            .ToListAsync();
-
+        var users = await _unitOfWork.Users.GetAllAsync();
         var userDtos = _mapper.Map<List<UserDto>>(users);
-
         return Ok(userDtos);
     }
 
-    [HttpGet("{id}")] // api/users/1
+    [HttpGet("{id}")]
     public async Task<ActionResult<UserDto>> GetUser(int id)
     {
-        var user = await _context.Users
-            .Include(u => u.Role) // Muy importante para que se cargue Role
-            .FirstOrDefaultAsync(u => u.Id == id);
-
+        var user = await _unitOfWork.Users.GetByIdAsync(id);
         if (user == null) return NotFound();
 
         var userDto = _mapper.Map<UserDto>(user);
         return Ok(userDto);
     }
 
-    [HttpPut("{id}")] // api/users/1
+    [HttpPut("{id}")]
     public async Task<ActionResult> UpdateUser(int id, UpdateUserDto dto)
     {
-        var user = await _context.Users
-            .Include(u => u.Role) // Muy importante para que se cargue Role
-            .FirstOrDefaultAsync(u => u.Id == id);
-
+        var user = await _unitOfWork.Users.GetByIdAsync(id);
         if (user == null) return NotFound();
 
-        _mapper.Map(dto, user); // Mapeo de UpdateUserDto a User
-
-        await _context.SaveChangesAsync();
+        _mapper.Map(dto, user);
+        _unitOfWork.Users.Update(user);
+        await _unitOfWork.CompleteAsync();
 
         return NoContent();
     }
 
-    [HttpDelete("{id}")] // api/users/1
+    [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteUser(int id)
     {
-        var user = await _context.Users
-            .Include(u => u.Role) // Muy importante para que se cargue Role
-            .FirstOrDefaultAsync(u => u.Id == id);
-
+        var user = await _unitOfWork.Users.GetByIdAsync(id);
         if (user == null) return NotFound();
 
-        _context.Users.Remove(user);
-        await _context.SaveChangesAsync();
+        _unitOfWork.Users.Remove(user);
+        await _unitOfWork.CompleteAsync();
 
         return NoContent();
     }
