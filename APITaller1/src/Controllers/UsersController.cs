@@ -1,9 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
 using APITaller1.src.Data;
-using AutoMapper;
-using APITaller1.src.Models;
-using APITaller1.src.Dtos.User;
 using APITaller1.src.Dtos;
+using APITaller1.src.Dtos.User;
+using APITaller1.src.Models;
+
+using AutoMapper;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 

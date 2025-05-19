@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using APITaller1.src.Models;
+
 using Bogus;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace APITaller1.src.Data
@@ -89,4 +92,3 @@ namespace APITaller1.src.Data
         }
     }
 }
-

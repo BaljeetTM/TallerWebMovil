@@ -1,4 +1,7 @@
 using APITaller1.src.Data;
+using APITaller1.src.Services;
+using APITaller1.src.Repositories;
+using APITaller1.src.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -17,6 +20,11 @@ try
 
     builder.Services.AddDbContext<StoreContext>(options =>
         options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+    builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
+
+    builder.Services.AddScoped<IProductRepository, ProductRepository>();
+    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
     builder.Host.UseSerilog((context, services, configuration) =>
     {

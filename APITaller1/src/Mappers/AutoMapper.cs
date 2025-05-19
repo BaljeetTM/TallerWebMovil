@@ -1,7 +1,8 @@
-using AutoMapper;
-using APITaller1.src.Models;
-using APITaller1.src.Dtos.User;
 using APITaller1.src.Dtos;
+using APITaller1.src.Dtos.User;
+using APITaller1.src.Models;
+
+using AutoMapper;
 
 namespace APITaller1.src.Mappings
 {

@@ -1,6 +1,7 @@
-using AutoMapper;
-using APITaller1.src.Models;
 using APITaller1.src.Dtos.Product;
+using APITaller1.src.Models;
+
+using AutoMapper;
 
 namespace APITaller1.src.Mappings
 {
