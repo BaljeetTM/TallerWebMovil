@@ -17,7 +17,11 @@ Asegúrate de tener instalados los siguientes componentes para ejecutar correcta
   - Asegúrate de tener instalado Git para clonar el repositorio. Descárgalo desde [git-scm.com](https://git-scm.com/).  
 
 - **Editor de código recomendado**:  
-  - [Visual Studio Code](https://code.visualstudio.com/) con las extensiones para .NET.  
+  - [Visual Studio Code](https://code.visualstudio.com/) con las extensiones para .NET.
+
+- **Postman**:
+  - Postman es una herramienta para probar y automatizar APIs mediante la creación, envío y gestión de solicitudes HTTP.
+  - Descarga e instala desde [Postman downloads](https://www.postman.com/downloads/).
 
 ## Instrucciones de Instalación y Ejecución  
 
@@ -39,7 +43,7 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
 4. **Ejecuta el proyecto**:  
    ```bash
    dotnet run
-5. **Accede al servidor web utilizando el navegador en http://localhost:<puerto> (el puerto se mostrará en la consola al ejecutar el proyecto).**
+5. **Accede a la colección de Postman incluido en el archivo e importalo en tu aplicación para poder probar los métodos HTTP.**
 
 ## Datos de los Integrantes
 
