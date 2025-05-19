@@ -16,7 +16,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7009/api/products",
+							"raw": "https://localhost:7009/api/Products",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -36,7 +36,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7009/api/products/1",
+							"raw": "https://localhost:7009/api/Products/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -66,7 +66,7 @@
 							"raw": "{\n  \"name\": \"Laptop\",\n  \"price\": 1200.50,\n  \"categoryId\": 3\n}"
 						},
 						"url": {
-							"raw": "https://localhost:7009/api/products",
+							"raw": "https://localhost:7009/api/Products",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -95,7 +95,7 @@
 							"raw": "{\n  \"name\": \"Updated Laptop\",\n  \"price\": 1300.75,\n  \"categoryId\": 3\n}"
 						},
 						"url": {
-							"raw": "https://localhost:7009/api/products/1",
+							"raw": "https://localhost:7009/api/Products/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -116,7 +116,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7009/api/products/1",
+							"raw": "https://localhost:7009/api/Products/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -142,7 +142,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7009/api/users",
+							"raw": "https://localhost:7009/api/User",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -162,7 +162,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7009/api/users/1",
+							"raw": "https://localhost:7009/api/User/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -192,7 +192,7 @@
 							"raw": "{\n  \"username\": \"johndoe\",\n  \"email\": \"johndoe@example.com\",\n  \"roleId\": 2\n}"
 						},
 						"url": {
-							"raw": "https://localhost:7009/api/users",
+							"raw": "https://localhost:7009/api/User",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -221,7 +221,7 @@
 							"raw": "{\n  \"username\": \"updatedjohndoe\",\n  \"email\": \"updatedjohndoe@example.com\",\n  \"roleId\": 3\n}"
 						},
 						"url": {
-							"raw": "https://localhost:7009/api/users/1",
+							"raw": "https://localhost:7009/api/User/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -242,7 +242,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7009/api/users/1",
+							"raw": "https://localhost:7009/api/User/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
