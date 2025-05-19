@@ -71,5 +71,50 @@ namespace APITaller1.src.Controllers
             var productsDto = _mapper.Map<List<ProductResponseDto>>(products);
             return Ok(productsDto);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateProduct(int id, [FromForm] ProductUpdateDto dto)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var product = await _unitOfWork.Products.GetByIdAsync(id);
+            if (product == null) return NotFound();
+
+            // Subir imágenes a Cloudinary
+            if (dto.Images != null && dto.Images.Any())
+            {
+                product.Images = new List<ProductImage>();
+
+                foreach (var file in dto.Images)
+                {
+                    var uploadResult = await _cloudinary.UploadImageAsync(file);
+                    if (!string.IsNullOrEmpty(uploadResult))
+                    {
+                        product.Images.Add(new ProductImage
+                        {
+                            Url = uploadResult
+                        });
+                    }
+                }
+            }
+
+            _mapper.Map(dto, product);
+            _unitOfWork.Products.Update(product);
+            await _unitOfWork.CompleteAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]        
+        public async Task<ActionResult> DeleteProduct(int id)
+        {
+            var product = await _unitOfWork.Products.GetByIdAsync(id);
+            if (product == null) return NotFound();
+
+            _unitOfWork.Products.Remove(product);
+            await _unitOfWork.CompleteAsync();
+
+            return NoContent();
+        }
     }
 }
