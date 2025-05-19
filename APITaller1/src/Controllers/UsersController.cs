@@ -70,7 +70,7 @@ public class UsersController : ControllerBase
         if (existing != null) return Conflict("El correo ya está registrado.");
 
         var user = _mapper.Map<User>(dto);
-        
+
         user.PasswordHash = dto.Password;
         user.RegistrationDate = DateTime.Now;
 
