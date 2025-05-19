@@ -1,8 +1,10 @@
-using APITaller1.src.Interfaces;
 using APITaller1.src.Dtos;
 using APITaller1.src.Dtos.User;
+using APITaller1.src.Interfaces;
 using APITaller1.src.Models;
+
 using AutoMapper;
+
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]

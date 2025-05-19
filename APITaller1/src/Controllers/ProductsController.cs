@@ -105,7 +105,7 @@ namespace APITaller1.src.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]        
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(int id)
         {
             var product = await _unitOfWork.Products.GetByIdAsync(id);
