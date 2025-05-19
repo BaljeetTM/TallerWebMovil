@@ -17,8 +17,7 @@ namespace APITaller1.src.Mappings
             // De CreateUserDto a entidad
             CreateMap<CreateUserDto, User>()
                 .ForMember(dest => dest.PasswordHash, opt => opt.Ignore()) // se hace manual
-                .ForMember(dest => dest.RegistrationDate, opt => opt.MapFrom(src => DateTime.Now))
-                .ForMember(dest => dest.Addresses, opt => opt.MapFrom(src => src.Addresses));
+                .ForMember(dest => dest.RegistrationDate, opt => opt.MapFrom(src => DateTime.Now));
 
             // Mapeo Address
             CreateMap<AddressDto, Address>();

@@ -62,4 +62,23 @@ public class UsersController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPost]
+    public async Task<ActionResult<UserDto>> CreateUser(CreateUserDto dto)
+    {
+        var existing = await _unitOfWork.Users.GetByEmailAsync(dto.Email);
+        if (existing != null) return Conflict("El correo ya está registrado.");
+
+        var user = _mapper.Map<User>(dto);
+        
+        user.PasswordHash = dto.Password;
+        user.RegistrationDate = DateTime.Now;
+
+        await _unitOfWork.Users.AddAsync(user);
+        await _unitOfWork.CompleteAsync();
+
+        var userDto = _mapper.Map<UserDto>(user);
+        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, userDto);
+    }
+
 }
