@@ -22,6 +22,21 @@ try
 
     builder.Services.AddDbContext<StoreContext>(options =>
         options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    var corsSettings = builder.Configuration.GetSection("CorsSettings");
+    var allowedOrigins = corsSettings.GetSection("AllowedOrigins").Get<string[]>();
+    var allowedHeaders = corsSettings.GetSection("AllowedHeaders").Get<string[]>();
+    var allowedMethods = corsSettings.GetSection("AllowedMethods").Get<string[]>();
+
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("DefaultCorsPolicy", policy =>
+        {
+            policy.WithOrigins(allowedOrigins!)
+                  .WithHeaders(allowedHeaders!)
+                  .WithMethods(allowedMethods!)
+                  .AllowCredentials(); // Si usas cookies para el basket
+        });
+    });
 
     builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
 
@@ -40,6 +55,7 @@ try
 
     var app = builder.Build();
 
+    app.UseCors("DefaultCorsPolicy");
     using (var scope = app.Services.CreateScope())
     {
         var db = scope.ServiceProvider.GetRequiredService<StoreContext>();
